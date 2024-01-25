@@ -16,14 +16,14 @@ food = Food()
 scoreboard = Scoreboard()
 
 difficulty_level = 0.1
-# difficulty_prompt = screen.textinput(title='Difficulty Levels:', prompt="What level you prefer?\n - Easy "
-#                                                                         "\n - Middle ""\n -Hard")
-# if difficulty_prompt and difficulty_prompt.lower() == 'easy':
-#     difficulty_level = 0.3
-# if difficulty_prompt and difficulty_prompt.lower() == 'middle':
-#     difficulty_level = 0.1
-# if difficulty_prompt and difficulty_prompt.lower() == 'hard':
-#     difficulty_level = 0.05
+difficulty_prompt = screen.textinput(title='Difficulty Levels:', prompt="What level you prefer?\n - Easy "
+                                                                        "\n - Middle ""\n -Hard")
+if difficulty_prompt and difficulty_prompt.lower() == 'easy':
+    difficulty_level = 0.3
+if difficulty_prompt and difficulty_prompt.lower() == 'middle':
+    difficulty_level = 0.1
+if difficulty_prompt and difficulty_prompt.lower() == 'hard':
+    difficulty_level = 0.05
 
 screen.listen()
 
@@ -50,6 +50,17 @@ while game_is_on:
     if snake.head.xcor() > 290 or snake.head.xcor() < -290 or snake.head.ycor() > 280 or snake.head.ycor() < -280:
         game_is_on = False
         scoreboard.game_over()
+
+    # Detect collision with tail
+    # if head collides with any segment in the tail:
+    # trigger game_over
+    for segment in snake.segments:
+        if segment == snake.head:
+            pass
+        elif snake.head.distance(segment) < 10:
+            game_is_on = False
+            scoreboard.game_over()
+
 
 
 screen.exitonclick()
